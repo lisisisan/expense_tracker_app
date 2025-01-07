@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expense_tracker_app/data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -93,7 +94,7 @@ class MainScreen extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
-                  const Text('\$ 4080.00',
+                  const Text('\$4080.00',
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
@@ -128,7 +129,7 @@ class MainScreen extends StatelessWidget {
                                         fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400)),
-                                Text('\$ 2500.00',
+                                Text('\$2500.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -161,7 +162,7 @@ class MainScreen extends StatelessWidget {
                                         fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400)),
-                                Text('\$ 2500.00',
+                                Text('\$2500.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,
@@ -202,7 +203,7 @@ class MainScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: transactionsData.length,
                   itemBuilder: (context, int index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
@@ -224,19 +225,16 @@ class MainScreen extends StatelessWidget {
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color: Colors.yellow[700],
+                                        color: transactionsData[index]['color'],
                                         shape: BoxShape.circle,
                                       ),
                                     ),
-                                    const Icon(
-                                      Icons.food_bank,
-                                      color: Colors.white,
-                                    )
+                                    transactionsData[index]['icon'],
                                   ],
                                 ),
                                 const SizedBox(width: 12),
                                 Text(
-                                  'Food',
+                                  transactionsData[index]['name'],
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Theme.of(context)
@@ -246,9 +244,10 @@ class MainScreen extends StatelessWidget {
                                 ),
                               ]),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '-\$ 45.00',
+                                    transactionsData[index]['totalAmount'],
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -257,7 +256,7 @@ class MainScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Today',
+                                    transactionsData[index]['date'],
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
