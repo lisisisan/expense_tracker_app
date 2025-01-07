@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +59,146 @@ class MainScreen extends StatelessWidget {
                     onPressed: () {},
                     icon: const Icon(CupertinoIcons.settings)),
               ],
-            )
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: MediaQuery.of(context).size.height / 4,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary,
+                      Theme.of(context).colorScheme.tertiary,
+                    ],
+                    // поворот градиента
+                    transform: const GradientRotation(pi / 4),
+                  ),
+                  borderRadius: BorderRadius.circular(25),
+                  // тень
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 5,
+                      color: Colors.grey.shade400,
+                      // угол падения тени
+                      offset: const Offset(5, 5),
+                    )
+                  ]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Total Balance',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 12),
+                  const Text('\$ 4080.00',
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 14),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              decoration: const BoxDecoration(
+                                  color: Colors.white30,
+                                  shape: BoxShape.circle),
+                              child: const Center(
+                                  child: Icon(
+                                CupertinoIcons.arrow_down,
+                                color: Colors.greenAccent,
+                                size: 12,
+                              )),
+                            ),
+                            const SizedBox(width: 8),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Income',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400)),
+                                Text('\$ 2500.00',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              decoration: const BoxDecoration(
+                                  color: Colors.white30,
+                                  shape: BoxShape.circle),
+                              child: const Center(
+                                  child: Icon(
+                                CupertinoIcons.arrow_up,
+                                color: Colors.red,
+                                size: 12,
+                              )),
+                            ),
+                            const SizedBox(width: 8),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Expenses',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400)),
+                                Text('\$ 2500.00',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Transactions',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontWeight: FontWeight.bold),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    'View All',
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.outline,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+              ],
+            ),
           ],
         )));
   }
