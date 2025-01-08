@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expense_tracker_app/screens/add_expense/views/add_expense.dart';
 import 'package:expense_tracker_app/screens/home/views/main_screen.dart';
 import 'package:expense_tracker_app/screens/stats/stat_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,12 @@ class _HomeScreenState extends State<HomeScreen> {
       // место нахождения floatingActionButton
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => const AddExpense(),
+          ),
+        ),
         shape: const CircleBorder(),
         // добавили градиент кнопке FloatingActionButton
         child: Container(
