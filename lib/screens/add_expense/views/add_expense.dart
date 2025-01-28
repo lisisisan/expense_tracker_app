@@ -68,12 +68,115 @@ class _AddExpenseState extends State<AddExpense> {
               const SizedBox(height: 32),
               TextFormField(
                 controller: categoryController,
+                readOnly: true,
+                onTap: () => {},
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
                   prefixIcon: const Icon(
                     CupertinoIcons.list_bullet,
                     size: 20,
+                    color: Colors.grey,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(
+                      CupertinoIcons.plus,
+                      size: 20,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      bool isExpended = false;
+
+                      showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return StatefulBuilder(
+                                builder: (context, setState) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                backgroundColor: Colors.grey,
+                                title: Text('Create a category',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey[900],
+                                    )),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      // controller: dateController,
+
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: 'Name',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      // controller: dateController,
+                                      readOnly: true,
+                                      onTap: () {
+                                        setState(() {
+                                          isExpended = !isExpended;
+                                        });
+                                      },
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        suffixIcon: const Icon(
+                                            CupertinoIcons.chevron_down,
+                                            size: 12),
+                                        hintText: 'Icon',
+                                        border: OutlineInputBorder(
+                                            borderRadius: isExpended
+                                                ? const BorderRadius.vertical(
+                                                    top: Radius.circular(12))
+                                                : BorderRadius.circular(12),
+                                            borderSide: BorderSide.none),
+                                      ),
+                                    ),
+                                    isExpended
+                                        ? Container(
+                                            width: double.infinity,
+                                            height: 200,
+                                            decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                        bottom: Radius.circular(
+                                                            12))),
+                                          )
+                                        : Container(),
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      // controller: dateController,
+
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: 'Color',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                          });
+                    },
                   ),
                   hintText: 'Category',
                   border: OutlineInputBorder(
