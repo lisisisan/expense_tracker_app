@@ -1,8 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class AddExpense extends StatelessWidget {
+class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
+
+  @override
+  State<AddExpense> createState() => _AddExpenseState();
+}
+
+class _AddExpenseState extends State<AddExpense> {
+  TextEditingController expenseController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    expenseController = TextEditingController();
+    categoryController = TextEditingController();
+    dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +51,7 @@ class AddExpense extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: TextFormField(
+                  controller: expenseController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -47,6 +67,7 @@ class AddExpense extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               TextFormField(
+                controller: categoryController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -62,12 +83,22 @@ class AddExpense extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: dateController,
                 readOnly: true,
-                onTap: () => showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 365))),
+                onTap: () async {
+                  DateTime? newDate = await showDatePicker(
+                      context: context,
+                      initialDate: selectedDate,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 365)));
+                  if (newDate != null) {
+                    setState(() {
+                      dateController.text =
+                          DateFormat('dd/MM/yyyy').format(newDate);
+                      selectedDate = newDate;
+                    });
+                  }
+                },
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
