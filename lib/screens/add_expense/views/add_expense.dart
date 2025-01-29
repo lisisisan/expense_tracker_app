@@ -230,11 +230,49 @@ class _AddExpenseState extends State<AddExpense> {
                                             context: context,
                                             builder: (ctx2) {
                                               return AlertDialog(
-                                                content: ColorPicker(
-                                                  pickerColor: Colors.blue,
-                                                  onColorChanged: (value) {
-                                                    setState(() {});
-                                                  },
+                                                backgroundColor: Colors.grey,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                content: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    ColorPicker(
+                                                      pickerColor: Colors.blue,
+                                                      onColorChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      height: 50,
+                                                      child: TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          backgroundColor:
+                                                              Colors.black,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12)),
+                                                        ),
+                                                        child: const Text(
+                                                          'Save',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20),
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.of(ctx2)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
                                               );
                                             },
