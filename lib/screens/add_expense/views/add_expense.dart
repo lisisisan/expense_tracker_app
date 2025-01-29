@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
 
 class AddExpense extends StatefulWidget {
@@ -223,6 +224,22 @@ class _AddExpenseState extends State<AddExpense> {
                                       TextFormField(
                                         // controller: dateController,
 
+                                        readOnly: true,
+                                        onTap: () => {
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx2) {
+                                              return AlertDialog(
+                                                content: ColorPicker(
+                                                  pickerColor: Colors.blue,
+                                                  onColorChanged: (value) {
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        },
                                         decoration: InputDecoration(
                                           isDense: true,
                                           filled: true,
