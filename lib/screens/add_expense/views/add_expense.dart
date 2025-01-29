@@ -15,6 +15,17 @@ class _AddExpenseState extends State<AddExpense> {
   TextEditingController dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
+  List<String> myCategoryIcons = [
+    'entertainment',
+    'food',
+    'home',
+    'pet',
+    'shopping',
+    'travel',
+  ];
+
+  String iconSelected = 'entertainment';
+
   @override
   void initState() {
     super.initState();
@@ -101,77 +112,130 @@ class _AddExpenseState extends State<AddExpense> {
                                     style: TextStyle(
                                       color: Colors.grey[900],
                                     )),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const SizedBox(height: 16),
-                                    TextFormField(
-                                      // controller: dateController,
+                                content: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(height: 16),
+                                      TextFormField(
+                                        // controller: dateController,
 
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintText: 'Name',
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: BorderSide.none),
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: 'Name',
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              borderSide: BorderSide.none),
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    TextFormField(
-                                      // controller: dateController,
-                                      readOnly: true,
-                                      onTap: () {
-                                        setState(() {
-                                          isExpended = !isExpended;
-                                        });
-                                      },
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        suffixIcon: const Icon(
-                                            CupertinoIcons.chevron_down,
-                                            size: 12),
-                                        hintText: 'Icon',
-                                        border: OutlineInputBorder(
-                                            borderRadius: isExpended
-                                                ? const BorderRadius.vertical(
-                                                    top: Radius.circular(12))
-                                                : BorderRadius.circular(12),
-                                            borderSide: BorderSide.none),
+                                      const SizedBox(height: 16),
+                                      TextFormField(
+                                        // controller: dateController,
+                                        readOnly: true,
+                                        onTap: () {
+                                          setState(() {
+                                            isExpended = !isExpended;
+                                          });
+                                        },
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          suffixIcon: const Icon(
+                                              CupertinoIcons.chevron_down,
+                                              size: 12),
+                                          hintText: 'Icon',
+                                          border: OutlineInputBorder(
+                                              borderRadius: isExpended
+                                                  ? const BorderRadius.vertical(
+                                                      top: Radius.circular(12))
+                                                  : BorderRadius.circular(12),
+                                              borderSide: BorderSide.none),
+                                        ),
                                       ),
-                                    ),
-                                    isExpended
-                                        ? Container(
-                                            width: double.infinity,
-                                            height: 200,
-                                            decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.vertical(
-                                                        bottom: Radius.circular(
-                                                            12))),
-                                          )
-                                        : Container(),
-                                    const SizedBox(height: 16),
-                                    TextFormField(
-                                      // controller: dateController,
+                                      isExpended
+                                          ? Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 200,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                          bottom:
+                                                              Radius.circular(
+                                                                  12))),
+                                              //icons grid drop down
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(3.0),
+                                                child: GridView.builder(
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 3,
+                                                            mainAxisSpacing: 5,
+                                                            crossAxisSpacing:
+                                                                5),
+                                                    itemCount:
+                                                        myCategoryIcons.length,
+                                                    itemBuilder:
+                                                        (context, int index) {
+                                                      return GestureDetector(
+                                                        onTap: () =>
+                                                            setState(() {
+                                                          iconSelected =
+                                                              myCategoryIcons[
+                                                                  index];
+                                                        }),
+                                                        child: Container(
+                                                          width: 50,
+                                                          height: 50,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            border: Border.all(
+                                                                color: iconSelected ==
+                                                                        myCategoryIcons[
+                                                                            index]
+                                                                    ? Colors
+                                                                        .green
+                                                                    : Colors
+                                                                        .transparent),
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    'assets/${myCategoryIcons[index]}.png')),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              ),
+                                            )
+                                          : Container(),
+                                      const SizedBox(height: 16),
+                                      TextFormField(
+                                        // controller: dateController,
 
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintText: 'Color',
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: BorderSide.none),
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintText: 'Color',
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              borderSide: BorderSide.none),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               );
                             });
