@@ -27,6 +27,8 @@ class _AddExpenseState extends State<AddExpense> {
 
   String iconSelected = 'entertainment';
 
+  late Color categotyColor = Colors.blue;
+
   @override
   void initState() {
     super.initState();
@@ -242,7 +244,9 @@ class _AddExpenseState extends State<AddExpense> {
                                                     ColorPicker(
                                                       pickerColor: Colors.blue,
                                                       onColorChanged: (value) {
-                                                        setState(() {});
+                                                        setState(() {
+                                                          categotyColor = value;
+                                                        });
                                                       },
                                                     ),
                                                     SizedBox(
@@ -281,12 +285,34 @@ class _AddExpenseState extends State<AddExpense> {
                                         decoration: InputDecoration(
                                           isDense: true,
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          // отображение выбранного цвета
+                                          fillColor: categotyColor,
                                           hintText: 'Color',
                                           border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               borderSide: BorderSide.none),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 32),
+                                      // адаптивные высота и ширина кнопки
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: kBottomNavigationBarHeight,
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                              backgroundColor: Colors.black,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              )),
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'Save',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22),
+                                          ),
                                         ),
                                       ),
                                     ],
