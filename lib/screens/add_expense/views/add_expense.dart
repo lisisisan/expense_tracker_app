@@ -242,7 +242,8 @@ class _AddExpenseState extends State<AddExpense> {
                                                       MainAxisSize.min,
                                                   children: [
                                                     ColorPicker(
-                                                      pickerColor: Colors.blue,
+                                                      pickerColor:
+                                                          categotyColor,
                                                       onColorChanged: (value) {
                                                         setState(() {
                                                           categotyColor = value;
